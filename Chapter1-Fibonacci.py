@@ -1,3 +1,4 @@
+from typing import Dict
 
 def fib1(n: int) -> int:
     """
@@ -25,6 +26,23 @@ def fib2(n: int) -> int:
     else:
         return fib2(n - 2) + fib2(n - 1)
 
+def fib3(n: int) -> int:
+    """
+    Aqui o autor introduz o conceito de memoização, que é a ideia de guardar o resultado
+    de tarefas computacionais para consulta futura, para que a mesma tarefa não seja repetida.
+    Neste caso a ideia é registrar o resultado cada vez que computamos um novo valor na posição
+    de n da sequência e realizar a computação em cima deste valor. Aqui então criamos um
+    dicionário que relaciona a posição n com seu valor computado e incluímos os dois primeiros
+    valores, nossos casos base. Caso o valor n não esteja no dicionário, seguimos em frente com
+    o processo. 
+    """
+    
+    memo: Dict[int, int] = {0: 0, 1: 1} 
+
+    if n not in memo:
+        memo[n] = fib3(n - 1) + fib3(n - 2)
+
+    return memo[n]
 
 if __name__ == "__main__":
-    print(fib2(6))
+    print(fib3(20))
