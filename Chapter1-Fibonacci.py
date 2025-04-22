@@ -1,4 +1,5 @@
 from typing import Dict
+from functools import lru_cache
 
 def fib1(n: int) -> int:
     """
@@ -43,6 +44,19 @@ def fib3(n: int) -> int:
         memo[n] = fib3(n - 1) + fib3(n - 2)
 
     return memo[n]
+
+
+@lru_cache(maxsize=None)
+def fib4(n: int) -> int:
+    """
+    Aqui usamos de uma biblioteca padrão do Python para fazer a memoização automática,
+    exatamente como fizemos com fib3(). O lru_cache 
+    """
+    if n < 2:
+        return n
+    else:
+        return fib4(n - 2) + fib4(n - 1)
+
 
 if __name__ == "__main__":
     print(fib3(20))
