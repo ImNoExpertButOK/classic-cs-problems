@@ -9,5 +9,18 @@ def fib1(n: int) -> int:
     return fib1(n - 1) + fib1(n - 2)
 
 
+def fib2(n: int) -> int:
+    """
+    Agora adicionamos o caso base, na forma do condicional if. Como a função chamará a si mesma
+    repetidamente com valores de n cada vez menores, eventualmente o valor será 1 ou 0, os dois
+    casos aonde o valor de n seria ele mesmo. Assim é como se o programa começasse a "andar de
+    volta" na stack, com um valor atualizado.
+    """
+    if n < 2:
+        return n
+    else:
+        return fib2(n - 2) + fib2(n - 1)
+
+
 if __name__ == "__main__":
-    print(fib1(5))
+    print(fib2(6))
