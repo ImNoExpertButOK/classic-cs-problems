@@ -14,7 +14,11 @@ def fib2(n: int) -> int:
     Agora adicionamos o caso base, na forma do condicional if. Como a função chamará a si mesma
     repetidamente com valores de n cada vez menores, eventualmente o valor será 1 ou 0, os dois
     casos aonde o valor de n seria ele mesmo. Assim é como se o programa começasse a "andar de
-    volta" na stack, com um valor atualizado.
+    volta" na stack, com um valor atualizado. Qual o problema? Com valores maiores essa
+    abordagem logo se torna insustentável, já que cada chamada da função resulta em duas outras
+    chamadas da mesma função, aumentando o numero de chamadas exponencialmente. Um exemplo:
+    Computar o vigésimo elemento desse conjunto de fibonacci usando esta função resultaria em
+    21891 chamadas!
     """
     if n < 2:
         return n
