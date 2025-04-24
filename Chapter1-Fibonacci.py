@@ -50,13 +50,50 @@ def fib3(n: int) -> int:
 def fib4(n: int) -> int:
     """
     Aqui usamos de uma biblioteca padrão do Python para fazer a memoização automática,
-    exatamente como fizemos com fib3(). O lru_cache 
+    exatamente como fizemos com fib3(). O lru_cache guarda o valor retornado pela função
+    toda vez que esse valor for novo.
     """
     if n < 2:
         return n
     else:
         return fib4(n - 2) + fib4(n - 1)
 
+def fib5(n: int) -> int:
+    """
+    Aqui o autor muda para uma abordagem iterativa, ao invés de recursiva. Estabelece
+    duas variáveis, uma para cada valor, e faz um variable swapping para atualizar o
+    valor a cada rodada do loop. Pessoalmente não sou super fã dessa abordagem hiper-
+    concisa. O autor ainda diz que todo problema que pode ser resolvido de maneira
+    recursiva pode ser resolvido de maneira iterativa.
+    """
+    if n == 0:
+        return n
+    else:
+        last: int = 0
+        next: int = 1
+
+        for _ in range(1, n):
+            last, next = next, last + next
+        return next
+
+
+def fib6(n: int) -> int:
+    """
+        Finalmente, o autor usa um generator para não só produzir o valor final, mas
+        ser capaz de retornar cada número gerado se colocados em um loop.
+    """
+    yield 0
+    
+    if n > 0:
+        yield 1
+        last: int = 0
+        next: int = 1
+
+        for _ in range(1, n):
+            last, next = next, last + next
+            yield next
 
 if __name__ == "__main__":
-    print(fib3(20))
+    print(fib5(20))
+    for i in fib6(20):
+        print(i)
